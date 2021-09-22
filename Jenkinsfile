@@ -15,6 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             when {
                 branch 'master'
+                echo "Hello, My name devops!"
             }
             steps {
                 script {
