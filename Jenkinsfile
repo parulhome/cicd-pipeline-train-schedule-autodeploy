@@ -32,6 +32,17 @@ pipeline {
                 }
             }    
         }
+        
+         stage('Kubernetes Deploy') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "train-schedule-kube.yml", kubeconfigId: "mykubeconfig")
+        }
+      }
+    }
+        
+        
+        /*
         stage('CanaryDeploy') {
             environment { 
                 CANARY_REPLICAS = 1
@@ -44,6 +55,7 @@ pipeline {
                 )
             }
         }
+        
         stage('DeployToProduction') {
             environment { 
                 CANARY_REPLICAS = 0
@@ -62,6 +74,7 @@ pipeline {
                     enableConfigSubstitution: true
                 )
             }
-        }
+        }*/
+        
     }
 }
