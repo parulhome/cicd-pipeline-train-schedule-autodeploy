@@ -36,7 +36,7 @@ pipeline {
          stage('Kubernetes Deploy') {
       steps {
         script {
-          kubernetesDeploy(configs: "train-schedule-kube.yml", kubeconfigId: "mykubeconfig")
+          kubernetesDeploy(configs: "train-schedule-kube.yml", kubeconfigId: "kubeconfig")
         }
       }
     }
