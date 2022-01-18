@@ -5,6 +5,8 @@ pipeline {
         DOCKER_IMAGE_NAME = "singhparul/mydevopstest"
     }
     stages {
+        
+        
         stage('Build') {
             steps {
                 echo 'Running build automation'
@@ -35,47 +37,13 @@ pipeline {
         
          stage('Kubernetes Deploy') {
       steps {
-           sh 'kubectl apply -f train-schedule-kube.yml'
-       /* script {
+        script {
           kubernetesDeploy(configs: "train-schedule-kube.yml", kubeconfigId: "kubeconfig",enableConfigSubstitution: true) 
-        } */
+        } 
       }
     }
         
         
-        /*
-        stage('CanaryDeploy') {
-            environment { 
-                CANARY_REPLICAS = 1
-            }
-            steps {
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube-canary.yml',
-                    enableConfigSubstitution: true
-                )
-            }
-        }
-        
-        stage('DeployToProduction') {
-            environment { 
-                CANARY_REPLICAS = 0
-            }
-            steps {
-                input 'Deploy to Production?'
-                milestone(1)
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube-canary.yml',
-                    enableConfigSubstitution: true
-                )
-                kubernetesDeploy(
-                    kubeconfigId: 'kubeconfig',
-                    configs: 'train-schedule-kube.yml',
-                    enableConfigSubstitution: true
-                )
-            }
-        }*/
         
     }
 }
