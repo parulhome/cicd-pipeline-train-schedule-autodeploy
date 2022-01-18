@@ -1,22 +1,21 @@
-/* apiVersion: apps/v1 */
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1 
 kind: Deployment
 metadata: 
-         name: train-cicd
+         name: train-cicd-v2
          labels:
            app: train-v2
 spec:
   replicas: 1 
   selector: 
      matchLabels:
-             app: train-v1
+             app: train-v2
   template:
      metadata:
        labels:
-          app: train-v1
+          app: train-v2
      spec:
        containers:
-       - name: train-cicd
+       - name: train-cicd-v2
          image: singhparul/mydevopstest:5
          ports:
          - containerPort: 8000
@@ -26,14 +25,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: train-svc
+  name: train-svc-v2
   labels:
-    app: train-v1
+    app: train-v2
 spec:
   type: NodePort
   ports:
   - port: 8000
     protocol: TCP
-    nodePort: 32013
+    nodePort: 32020
   selector:
-    app: app-v1
+    app: train-v2
