@@ -35,9 +35,10 @@ pipeline {
         
          stage('Kubernetes Deploy') {
       steps {
-        script {
-          kubernetesDeploy(configs: "train-schedule-kube.yml", kubeconfigId: "kubeconfig",enableConfigSubstitution: true)
-        }
+           sh 'kubectl apply -f train-schedule-kube.yml'
+       /* script {
+          kubernetesDeploy(configs: "train-schedule-kube.yml", kubeconfigId: "kubeconfig",enableConfigSubstitution: true) 
+        } */
       }
     }
         
